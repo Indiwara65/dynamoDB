@@ -40,11 +40,22 @@
 #### Multiple Conditions
 * AND - Key('user_id').eq('user_1') & Attr('username').eq('James')
 * OR - Key('user_id).eq('user_1') | Key('user_id).eq('user_2') | Key('user_id').eq('user_3')
+#### Expressions
+* Conditions can be runned against keys or other attributes.          
+     - KeyConditionExpression                  
+     - FilterExpression
+* Running FilterExpression costs more as initall all the data that match the Key condition is pulled and then sorted. AWS calculates cost for the data that is pulled initially, which can increase cost by a lot if the tables are large.
+* Regardless, all queries are run against a primary key condition. A *scan* can be used instead of a *query* to query results without a primary key condition.
 ## GSI - Global Secondary Index
+* By creating a *Global Seondary Index* a new partition key can be created for the same table which can be used to query the table against.
+* A GSI can also have a optional partion key.           
+* GSI allows to run quieries without using *Scan* but also cost money to keep a GSI active.
+* GSI can be added any point in time.
 
 ## LSI - Local Secondary Index
-
-
+* A *Local Secondary Index* will allow to add a sort key but will have the same partition key.
+* LSI can only be added at table creation.
+* LSI is generally cheaper than GSI.
 
 
 
